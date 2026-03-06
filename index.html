@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>8 марта</title>
+    <!-- Элегантные шрифты -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -35,7 +39,7 @@
             z-index: -2;
         }
 
-        /* Очень тонкие движущиеся абстрактные формы */
+        /* Тонкие движущиеся абстрактные формы */
         .moving-shapes {
             position: fixed;
             top: 0;
@@ -126,18 +130,35 @@
             margin: 1.5rem auto;
         }
 
-        p {
-            font-size: 1.25rem;
-            font-weight: 300;
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1.2rem;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        /* Специальный блок с красивым текстом */
+        .special-message {
+            margin: 2.5rem 0 1rem;
+        }
+        .line1 {
+            font-size: 3rem;
+            font-weight: 400;
+            font-family: 'Playfair Display', 'Times New Roman', serif;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.98);
+            text-shadow: 0 0 15px rgba(210, 230, 255, 0.3);
+            line-height: 1.2;
+        }
+        .line2 {
+            font-size: 2.8rem;
+            font-weight: 400;
+            font-family: 'Dancing Script', cursive;
+            margin-top: 0.75rem;
+            color: rgba(255, 245, 250, 0.95);
+            text-shadow: 0 0 12px rgba(255, 220, 240, 0.3);
+            line-height: 1.2;
         }
 
-        /* Адаптация под совсем маленькие экраны */
+        /* Адаптация под маленькие экраны */
         @media (max-width: 400px) {
             h1 { font-size: 2.4rem; }
-            p { font-size: 1.1rem; }
+            .line1 { font-size: 2.2rem; }
+            .line2 { font-size: 2rem; }
             .content { padding: 1.8rem 1rem; }
         }
     </style>
@@ -153,10 +174,11 @@
     <div class="content">
         <h1>8 марта</h1>
         <div class="divider"></div>
-        <p>Пусть этот день будет именно таким,<br>каким ты захочешь.</p>
-        <p>Тёплым, светлым, тихим —<br>или полным улыбок.</p>
-        <p>Просто знай: сегодня всё для тебя.</p>
-        <!-- звёздочка удалена по просьбе -->
+        <div class="special-message">
+            <div class="line1">E.S.Mapma!</div>
+            <div class="line2">I Love You</div>
+        </div>
+        <!-- Никакого лишнего текста — только элегантная надпись -->
     </div>
 </body>
 </html>
