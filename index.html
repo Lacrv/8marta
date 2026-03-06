@@ -24,7 +24,7 @@
             overflow-x: hidden;
         }
 
-        /* Тёмно-синий градиент (самый нижний слой) */
+        /* Тёмно-синий градиент */
         .gradient-bg {
             position: fixed;
             top: 0;
@@ -35,7 +35,7 @@
             z-index: -2;
         }
 
-        /* Тонкие движущиеся абстрактные формы (второй слой) */
+        /* Тонкие движущиеся абстрактные формы */
         .moving-shapes {
             position: fixed;
             top: 0;
@@ -89,7 +89,7 @@
             100% { transform: translate(4%, 3%) scale(1.1); }
         }
 
-        /* Слой с лицами (падают как конфетти сверху) */
+        /* Слой с падающими лицами (конфетти из фото) */
         .faces-layer {
             position: fixed;
             top: 0;
@@ -108,7 +108,7 @@
             border-radius: 50%;
             object-fit: cover;
             opacity: 0;
-            top: -10%; /* начальное положение выше экрана */
+            top: -10%;
             animation: fallConfetti 10s linear infinite;
             filter: grayscale(20%) contrast(1.1);
             box-shadow: 0 0 8px rgba(255,255,255,0.1);
@@ -170,16 +170,7 @@
             transform: scale(1.02);
         }
 
-        /* Текст поздравления */
-        .name {
-            font-size: 2rem;
-            font-weight: 300;
-            letter-spacing: 1px;
-            margin-bottom: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
+        /* Текст поздравления (три абзаца) */
         p {
             font-size: 1.25rem;
             font-weight: 300;
@@ -190,7 +181,6 @@
 
         /* Адаптация под маленькие экраны */
         @media (max-width: 400px) {
-            .name { font-size: 1.8rem; }
             p { font-size: 1.1rem; }
             .content { padding: 1.8rem 1rem; }
             .face-particle { width: 30px; height: 30px; }
@@ -205,13 +195,14 @@
         <div class="shape shape3"></div>
     </div>
 
-    <!-- Слой с множеством маленьких копий фотографии (лица) -->
+    <!-- Слой с множеством маленьких копий фотографии (падают сверху) -->
     <div class="faces-layer" id="facesLayer"></div>
 
     <div class="content">
         <img src="photo.jpg" alt="Поздравление" class="photo">
-        <div class="name">Е. Марья</div>
         <p>Пусть этот день будет именно таким,<br>каким ты захочешь.</p>
+        <p>Тёплым, светлым, тихим —<br>или полным улыбок.</p>
+        <p>Просто знай: сегодня всё для тебя.</p>
     </div>
 
     <script>
@@ -221,7 +212,7 @@
 
             for (let i = 0; i < numberOfFaces; i++) {
                 const img = document.createElement('img');
-                img.src = 'image.jpg'; // тот же файл
+                img.src = 'photo.jpg'; // тот же файл
                 img.alt = '';
                 img.classList.add('face-particle');
 
@@ -230,10 +221,10 @@
                 img.style.width = size + 'px';
                 img.style.height = size + 'px';
 
-                // случайное положение по горизонтали (от 0% до 100%)
+                // случайное положение по горизонтали
                 img.style.left = Math.random() * 100 + '%';
 
-                // случайная задержка анимации (чтобы не все одновременно начинали)
+                // случайная задержка анимации (чтобы не все одновременно)
                 img.style.animationDelay = Math.random() * 15 + 's';
                 // случайная длительность анимации
                 const duration = Math.random() * 10 + 8; // от 8 до 18 секунд
