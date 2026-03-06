@@ -126,20 +126,41 @@
             margin: 1.5rem auto;
         }
 
-        /* Стили для фото */
+        /* Контейнер для квадратного фото */
+        .photo-container {
+            width: 100%;
+            max-width: 300px;
+            margin: 1.5rem auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+        }
+
         .photo {
             width: 100%;
-            max-width: 400px;
             height: auto;
-            border-radius: 24px;
-            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-            margin: 0 auto 1.5rem;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
             display: block;
             transition: transform 0.3s ease;
         }
 
         .photo:hover {
             transform: scale(1.02);
+        }
+
+        /* Подпись под фото */
+        .signature {
+            font-size: 1.4rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 0.5rem;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: inline-block;
+            padding-bottom: 0.3rem;
         }
 
         /* Текст поздравления */
@@ -154,6 +175,7 @@
         /* Адаптация под маленькие экраны */
         @media (max-width: 400px) {
             h1 { font-size: 2.4rem; }
+            .signature { font-size: 1.2rem; }
             p { font-size: 1.1rem; }
             .content { padding: 1.8rem 1rem; }
         }
@@ -170,7 +192,16 @@
     <div class="content">
         <h1>8 марта</h1>
         <div class="divider"></div>
-        <img src="photo.jpg" alt="Поздравление" class="photo">
+        
+        <!-- Квадратное фото -->
+        <div class="photo-container">
+            <img src="photo.jpg" alt="Поздравление" class="photo">
+        </div>
+        
+        <!-- Подпись (инициалы/имя) -->
+        <div class="signature">Е.В. Матюша</div>
+        
+        <!-- Текст поздравления -->
         <p>Пусть этот день будет именно таким,<br>каким ты захочешь.</p>
         <p>Тёплым, светлым, тихим —<br>или полным улыбок.</p>
         <p>Просто знай: сегодня всё для тебя.</p>
