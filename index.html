@@ -133,9 +133,9 @@
 
         /* Основной контент (поверх всего) */
         .content {
-            max-width: 500px;
+            max-width: 480px;
             width: 85%;
-            padding: 2rem 1.5rem;
+            padding: 1.8rem 1.2rem;
             background: rgba(10, 25, 40, 0.3);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -144,7 +144,7 @@
             box-shadow: 0 25px 40px -20px rgba(0,0,0,0.5);
             text-align: center;
             animation: fadeIn 1.8s ease-out;
-            margin: 1.5rem;
+            margin: 1rem;
             position: relative;
             z-index: 2;
         }
@@ -157,11 +157,11 @@
         /* Стили для основной фотографии */
         .photo {
             width: 100%;
-            max-width: 400px;
+            max-width: 280px; /* уменьшено для мобильных */
             height: auto;
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-            margin: 0 auto 1.5rem;
+            margin: 0 auto 1.2rem;
             display: block;
             transition: transform 0.3s ease;
         }
@@ -170,20 +170,30 @@
             transform: scale(1.02);
         }
 
-        /* Текст поздравления (три абзаца) */
+        /* Текст поздравления */
         p {
-            font-size: 1.25rem;
+            font-size: 1.1rem; /* немного уменьшен */
             font-weight: 300;
             color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             text-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        /* Адаптация под маленькие экраны */
-        @media (max-width: 400px) {
-            p { font-size: 1.1rem; }
-            .content { padding: 1.8rem 1rem; }
-            .face-particle { width: 30px; height: 30px; }
+        /* Адаптация под очень маленькие экраны */
+        @media (max-width: 380px) {
+            .content {
+                padding: 1.5rem 1rem;
+            }
+            .photo {
+                max-width: 220px;
+            }
+            p {
+                font-size: 1rem;
+            }
+            .face-particle {
+                width: 30px;
+                height: 30px;
+            }
         }
     </style>
 </head>
@@ -212,7 +222,7 @@
 
             for (let i = 0; i < numberOfFaces; i++) {
                 const img = document.createElement('img');
-                img.src = 'image.jpg'; // тот же файл
+                img.src = 'photo.jpg'; // тот же файл
                 img.alt = '';
                 img.classList.add('face-particle');
 
@@ -224,7 +234,7 @@
                 // случайное положение по горизонтали
                 img.style.left = Math.random() * 100 + '%';
 
-                // случайная задержка анимации (чтобы не все одновременно)
+                // случайная задержка анимации
                 img.style.animationDelay = Math.random() * 15 + 's';
                 // случайная длительность анимации
                 const duration = Math.random() * 10 + 8; // от 8 до 18 секунд
