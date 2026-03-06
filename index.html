@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>С 8 марта!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(145deg, #fbc2eb 0%, #a6c1ee 100%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .floating {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0.7;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            animation: float 6s infinite ease-in-out;
+            user-select: none;
+        }
+
+        .floating:nth-child(1) { top: 10%; left: 5%; animation-duration: 8s; }
+        .floating:nth-child(2) { top: 70%; left: 85%; animation-duration: 10s; animation-delay: 1s; }
+        .floating:nth-child(3) { top: 20%; left: 90%; animation-duration: 7s; animation-delay: 2s; }
+        .floating:nth-child(4) { top: 80%; left: 10%; animation-duration: 9s; animation-delay: 0.5s; }
+        .floating:nth-child(5) { top: 40%; left: 20%; animation-duration: 11s; animation-delay: 1.5s; }
+        .floating:nth-child(6) { top: 60%; left: 70%; animation-duration: 8s; animation-delay: 2.2s; }
+        .floating:nth-child(7) { top: 15%; left: 40%; animation-duration: 12s; animation-delay: 0.2s; }
+        .floating:nth-child(8) { top: 85%; left: 50%; animation-duration: 9s; animation-delay: 1.8s; }
+        .floating:nth-child(9) { top: 30%; left: 75%; animation-duration: 7.5s; animation-delay: 0.8s; }
+        .floating:nth-child(10) { top: 50%; left: 30%; animation-duration: 10.5s; animation-delay: 2.5s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(10deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 40px;
+            padding: 2.5rem 3rem;
+            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(255, 255, 255, 0.5) inset;
+            text-align: center;
+            max-width: 800px;
+            width: 90%;
+            margin: 20px;
+            z-index: 10;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            font-size: 3.2rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 200, 235, 0.8);
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.8rem;
+            color: #fff8f0;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+            font-weight: 300;
+        }
+
+        /* Стиль для фотографии */
+        .photo-container {
+            margin: 1.5rem 0;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border: 3px solid white;
+        }
+
+        .greeting-photo {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            transition: transform 0.3s;
+        }
+
+        .greeting-photo:hover {
+            transform: scale(1.02);
+        }
+
+        .message {
+            font-size: 1.4rem;
+            color: #2d1b3c;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 1.2rem 2rem;
+            border-radius: 60px;
+            margin: 2rem 0;
+            font-weight: 500;
+            line-height: 1.5;
+            backdrop-filter: blur(5px);
+            border: 1px solid white;
+        }
+
+        .emoji-big {
+            font-size: 3rem;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        .button {
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            border: none;
+            color: #4a2c2f;
+            font-size: 1.6rem;
+            font-weight: 600;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 20px rgba(255, 120, 120, 0.4), 0 0 0 2px white inset;
+            transition: all 0.2s ease;
+            margin-top: 1.5rem;
+            border: 2px solid white;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(255, 80, 80, 0.5), 0 0 0 3px white inset;
+            background: linear-gradient(45deg, #ffb6b9, #ffe0d4);
+        }
+
+        .confetti {
+            position: fixed;
+            width: 12px;
+            height: 12px;
+            background-color: #f0f;
+            top: -10px;
+            z-index: 9999;
+            animation: confettiFall 3s linear forwards;
+            pointer-events: none;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.4rem; }
+            .subtitle { font-size: 1.5rem; }
+            .message { font-size: 1.2rem; padding: 1rem; }
+            .button { font-size: 1.3rem; padding: 0.8rem 1.8rem; }
+            .floating { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="floating-elements">
+        <div class="floating"><i class="fas fa-heart"></i></div>
+        <div class="floating"><i class="fas fa-flower"></i></div>
+        <div class="floating"><i class="fas fa-heart"></i></div>
+        <div class="floating"><i class="fas fa-seedling"></i></div>
+        <div class="floating"><i class="fas fa-star"></i></div>
+        <div class="floating"><i class="fas fa-heart"></i></div>
+        <div class="floating"><i class="fas fa-sun"></i></div>
+        <div class="floating"><i class="fas fa-heart"></i></div>
+        <div class="floating"><i class="fas fa-leaf"></i></div>
+        <div class="floating"><i class="fas fa-heart"></i></div>
+    </div>
+
+    <div class="card">
+        <h1>🌸 С 8 марта! 🌸</h1>
+        <div class="subtitle">самой яркой и вдохновляющей</div>
+
+        <!-- Блок с фотографией (замени photo.jpg на имя твоего файла) -->
+        <div class="photo-container">
+            <img src="photo.jpg" alt="С 8 марта" class="greeting-photo">
+        </div>
+
+        <div class="message">
+            <span class="emoji-big">✨</span> Пусть этот весенний день подарит тебе море улыбок, тепло и свет. Желаю, чтобы всё задуманное сбывалось, а рядом были только любимые люди. Ты чудесная, оставайся такой же солнечной! <span class="emoji-big">💐</span>
+        </div>
+        <div style="font-size: 1.8rem; color: #fff; margin: 1rem 0;">🌷🌷🌷</div>
+        <button class="button" id="surpriseBtn">🎉 Нажми на сюрприз 🎉</button>
+    </div>
+
+    <script>
+        document.getElementById('surpriseBtn').addEventListener('click', function() {
+            for (let i = 0; i < 150; i++) createConfetti();
+        });
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            const colors = ['#f44336', '#e91e63', '#9c27b0', '#673ab7', '#3f51b5', '#2196f3', '#03a9f4', '#00bcd4', '#009688', '#4CAF50', '#8BC34A', '#CDDC39', '#FFEB3B', '#FFC107', '#FF9800', '#FF5722', '#795548', '#9E9E9E'];
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            const shape = Math.random();
+            if (shape < 0.33) confetti.style.borderRadius = '50%';
+            else if (shape < 0.66) confetti.style.borderRadius = '0';
+            else { confetti.style.borderRadius = '2px'; confetti.style.width = '8px'; confetti.style.height = '16px'; }
+            confetti.style.left = Math.random() * 100 + '%';
+            confetti.style.animationDelay = Math.random() * 1.5 + 's';
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 4500);
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                for (let i = 0; i < 30; i++) createConfetti();
+            }, 500);
+        });
+    </script>
+
+</body>
+</html>
