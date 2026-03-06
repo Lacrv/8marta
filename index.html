@@ -133,7 +133,7 @@
             height: auto;
             border-radius: 24px;
             box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-            margin: 0 auto 1rem;
+            margin: 0 auto 1.5rem;
             display: block;
             transition: transform 0.3s ease;
         }
@@ -142,9 +142,19 @@
             transform: scale(1.02);
         }
 
+        /* Текст поздравления */
+        p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
         /* Адаптация под маленькие экраны */
         @media (max-width: 400px) {
             h1 { font-size: 2.4rem; }
+            p { font-size: 1.1rem; }
             .content { padding: 1.8rem 1rem; }
         }
     </style>
@@ -161,6 +171,9 @@
         <h1>8 марта</h1>
         <div class="divider"></div>
         <img src="photo.jpg" alt="Поздравление" class="photo">
+        <p>Пусть этот день будет именно таким,<br>каким ты захочешь.</p>
+        <p>Тёплым, светлым, тихим —<br>или полным улыбок.</p>
+        <p>Просто знай: сегодня всё для тебя.</p>
     </div>
 </body>
 </html>
