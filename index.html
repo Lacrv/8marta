@@ -89,7 +89,7 @@
             100% { transform: translate(4%, 3%) scale(1.1); }
         }
 
-        /* Слой с лицами (появляются из ниоткуда) */
+        /* Слой с лицами (падают как конфетти сверху) */
         .faces-layer {
             position: fixed;
             top: 0;
@@ -108,31 +108,26 @@
             border-radius: 50%;
             object-fit: cover;
             opacity: 0;
-            animation: appearFromNowhere 8s infinite ease-in-out;
+            top: -10%; /* начальное положение выше экрана */
+            animation: fallConfetti 10s linear infinite;
             filter: grayscale(20%) contrast(1.1);
             box-shadow: 0 0 8px rgba(255,255,255,0.1);
         }
 
-        @keyframes appearFromNowhere {
+        @keyframes fallConfetti {
             0% {
+                transform: translateY(0) rotate(0deg);
                 opacity: 0;
-                transform: scale(0.8) rotate(0deg);
             }
-            20% {
+            10% {
                 opacity: 0.25;
-                transform: scale(1) rotate(5deg);
             }
-            50% {
+            90% {
                 opacity: 0.2;
-                transform: scale(0.95) rotate(-3deg);
-            }
-            80% {
-                opacity: 0.15;
-                transform: scale(1) rotate(2deg);
             }
             100% {
+                transform: translateY(110vh) rotate(360deg);
                 opacity: 0;
-                transform: scale(0.8) rotate(0deg);
             }
         }
 
@@ -226,23 +221,22 @@
 
             for (let i = 0; i < numberOfFaces; i++) {
                 const img = document.createElement('img');
-                img.src = 'photo.jpg'; // тот же файл
+                img.src = 'image.jpg'; // тот же файл
                 img.alt = '';
                 img.classList.add('face-particle');
 
-                // случайный размер (немного варьируем)
+                // случайный размер
                 const size = Math.floor(Math.random() * 20) + 30; // от 30 до 50 пикселей
                 img.style.width = size + 'px';
                 img.style.height = size + 'px';
 
-                // случайное положение по горизонтали и вертикали (чтобы появлялись в любом месте)
+                // случайное положение по горизонтали (от 0% до 100%)
                 img.style.left = Math.random() * 100 + '%';
-                img.style.top = Math.random() * 100 + '%';
 
-                // случайная задержка анимации
-                img.style.animationDelay = Math.random() * 10 + 's';
-                // случайная длительность анимации (разная скорость мерцания)
-                const duration = Math.random() * 10 + 6; // от 6 до 16 секунд
+                // случайная задержка анимации (чтобы не все одновременно начинали)
+                img.style.animationDelay = Math.random() * 15 + 's';
+                // случайная длительность анимации
+                const duration = Math.random() * 10 + 8; // от 8 до 18 секунд
                 img.style.animationDuration = duration + 's';
 
                 facesLayer.appendChild(img);
@@ -251,4 +245,3 @@
     </script>
 </body>
 </html>
-
