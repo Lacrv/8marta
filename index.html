@@ -89,7 +89,7 @@
             100% { transform: translate(4%, 3%) scale(1.1); }
         }
 
-        /* Слой с лицами (вместо конфетти) */
+        /* Слой с лицами (появляются из ниоткуда) */
         .faces-layer {
             position: fixed;
             top: 0;
@@ -107,26 +107,32 @@
             height: 40px;
             border-radius: 50%;
             object-fit: cover;
-            opacity: 0.2;
-            animation: floatFace 15s infinite linear;
+            opacity: 0;
+            animation: appearFromNowhere 8s infinite ease-in-out;
             filter: grayscale(20%) contrast(1.1);
             box-shadow: 0 0 8px rgba(255,255,255,0.1);
         }
 
-        @keyframes floatFace {
+        @keyframes appearFromNowhere {
             0% {
-                transform: translateY(-10vh) rotate(0deg);
                 opacity: 0;
+                transform: scale(0.8) rotate(0deg);
             }
-            10% {
-                opacity: 0.2;
+            20% {
+                opacity: 0.25;
+                transform: scale(1) rotate(5deg);
             }
-            90% {
+            50% {
                 opacity: 0.2;
+                transform: scale(0.95) rotate(-3deg);
+            }
+            80% {
+                opacity: 0.15;
+                transform: scale(1) rotate(2deg);
             }
             100% {
-                transform: translateY(110vh) rotate(360deg);
                 opacity: 0;
+                transform: scale(0.8) rotate(0deg);
             }
         }
 
@@ -170,6 +176,15 @@
         }
 
         /* Текст поздравления */
+        .name {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
         p {
             font-size: 1.25rem;
             font-weight: 300;
@@ -180,6 +195,7 @@
 
         /* Адаптация под маленькие экраны */
         @media (max-width: 400px) {
+            .name { font-size: 1.8rem; }
             p { font-size: 1.1rem; }
             .content { padding: 1.8rem 1rem; }
             .face-particle { width: 30px; height: 30px; }
@@ -199,9 +215,8 @@
 
     <div class="content">
         <img src="photo.jpg" alt="Поздравление" class="photo">
+        <div class="name">Е. Марья</div>
         <p>Пусть этот день будет именно таким,<br>каким ты захочешь.</p>
-        <p>Тёплым, светлым, тихим —<br>или полным улыбок.</p>
-        <p>Просто знай: сегодня всё для тебя.</p>
     </div>
 
     <script>
@@ -211,7 +226,7 @@
 
             for (let i = 0; i < numberOfFaces; i++) {
                 const img = document.createElement('img');
-                img.src = 'image.jpg'; // тот же файл
+                img.src = 'photo.jpg'; // тот же файл
                 img.alt = '';
                 img.classList.add('face-particle');
 
@@ -220,12 +235,14 @@
                 img.style.width = size + 'px';
                 img.style.height = size + 'px';
 
-                // случайное начальное положение по горизонтали
+                // случайное положение по горизонтали и вертикали (чтобы появлялись в любом месте)
                 img.style.left = Math.random() * 100 + '%';
+                img.style.top = Math.random() * 100 + '%';
+
                 // случайная задержка анимации
-                img.style.animationDelay = Math.random() * 15 + 's';
-                // случайная длительность анимации
-                const duration = Math.random() * 15 + 10; // от 10 до 25 секунд
+                img.style.animationDelay = Math.random() * 10 + 's';
+                // случайная длительность анимации (разная скорость мерцания)
+                const duration = Math.random() * 10 + 6; // от 6 до 16 секунд
                 img.style.animationDuration = duration + 's';
 
                 facesLayer.appendChild(img);
@@ -234,3 +251,4 @@
     </script>
 </body>
 </html>
+
