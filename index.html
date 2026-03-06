@@ -2,286 +2,161 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>С 8 марта!</title>
-    <!-- Font Awesome для иконок -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>8 марта</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Roboto, sans-serif;
         }
 
         body {
             min-height: 100vh;
+            background: #0b1a2e;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Глубокий фиолетово-золотой градиент */
-            background: radial-gradient(circle at top left, #4b0082, #ff8c00);
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.5;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* Мерцающие частицы (звёздочки) */
-        .stars {
-            position: absolute;
+        /* Тёмно-синий градиент */
+        .gradient-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;
-            z-index: 0;
+            background: radial-gradient(circle at 30% 40%, #132b44, #05111f);
+            z-index: -2;
         }
-        .star {
+
+        /* Очень тонкие движущиеся абстрактные формы */
+        .moving-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .shape {
             position: absolute;
-            background: white;
+            background: rgba(200, 220, 255, 0.1);
             border-radius: 50%;
-            box-shadow: 0 0 20px gold;
-            animation: twinkle 3s infinite ease-in-out;
-        }
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            50% { opacity: 1; transform: scale(1.2); box-shadow: 0 0 30px gold; }
-            100% { opacity: 0.2; transform: scale(0.8); }
+            filter: blur(40px);
+            animation: floatShape 18s infinite alternate ease-in-out;
         }
 
-        /* Плавающие элементы (теперь разноцветные) */
-        .floating-elements {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        .floating {
-            position: absolute;
-            font-size: 2.5rem;
-            opacity: 0.8;
-            filter: drop-shadow(0 0 15px currentColor);
-            animation: float 8s infinite ease-in-out;
-            user-select: none;
-        }
-        /* Разные цвета для иконок */
-        .floating:nth-child(1) { color: #ff69b4; top: 10%; left: 5%; animation-duration: 9s; } /* розовый */
-        .floating:nth-child(2) { color: #ffd700; top: 70%; left: 85%; animation-duration: 11s; animation-delay: 1s; } /* золото */
-        .floating:nth-child(3) { color: #7fffd4; top: 20%; left: 90%; animation-duration: 8s; animation-delay: 2s; } /* бирюза */
-        .floating:nth-child(4) { color: #ffa07a; top: 80%; left: 10%; animation-duration: 10s; animation-delay: 0.5s; } /* коралл */
-        .floating:nth-child(5) { color: #da70d6; top: 40%; left: 20%; animation-duration: 12s; animation-delay: 1.5s; } /* орхидея */
-        .floating:nth-child(6) { color: #ff6347; top: 60%; left: 70%; animation-duration: 9s; animation-delay: 2.2s; } /* томатный */
-        .floating:nth-child(7) { color: #9370db; top: 15%; left: 40%; animation-duration: 13s; animation-delay: 0.2s; } /* средне-пурпурный */
-        .floating:nth-child(8) { color: #ffb6c1; top: 85%; left: 50%; animation-duration: 10s; animation-delay: 1.8s; } /* светло-розовый */
-        .floating:nth-child(9) { color: #f0e68c; top: 30%; left: 75%; animation-duration: 8.5s; animation-delay: 0.8s; } /* хаки */
-        .floating:nth-child(10) { color: #dda0dd; top: 50%; left: 30%; animation-duration: 11.5s; animation-delay: 2.5s; } /* слива */
-
-        @keyframes float {
-            0% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-40px) rotate(15deg); }
-            100% { transform: translateY(0px) rotate(0deg); }
+        .shape1 {
+            width: 40vmax;
+            height: 40vmax;
+            top: -10vmax;
+            right: -10vmax;
+            background: rgba(90, 140, 210, 0.1);
+            animation-duration: 22s;
         }
 
-        /* Основная карточка — теперь с золотистым оттенком */
-        .card {
-            background: rgba(0, 0, 0, 0.3); /* тёмный полупрозрачный фон для контраста */
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-radius: 50px;
-            padding: 3rem 3.5rem;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.5), 0 0 0 3px gold inset;
+        .shape2 {
+            width: 30vmin;
+            height: 30vmin;
+            bottom: 5vh;
+            left: -5vmin;
+            background: rgba(150, 180, 240, 0.1);
+            filter: blur(50px);
+            animation-duration: 17s;
+        }
+
+        .shape3 {
+            width: 50vmin;
+            height: 50vmin;
+            top: 20vh;
+            left: 30vw;
+            background: rgba(110, 160, 230, 0.08);
+            filter: blur(60px);
+            animation-duration: 25s;
+        }
+
+        @keyframes floatShape {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(4%, 3%) scale(1.1); }
+        }
+
+        /* Основной контент */
+        .content {
+            max-width: 500px;
+            width: 85%;
+            padding: 2rem 1.5rem;
+            background: rgba(10, 25, 40, 0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 32px;
+            box-shadow: 0 25px 40px -20px rgba(0,0,0,0.5);
             text-align: center;
-            max-width: 800px;
-            width: 90%;
-            margin: 20px;
-            z-index: 10;
-            position: relative;
-            border: 2px solid rgba(255, 215, 0, 0.6);
-            transition: all 0.4s ease;
+            animation: fadeIn 1.8s ease-out;
+            margin: 1.5rem;
         }
 
-        .card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 40px 70px rgba(0, 0, 0, 0.7), 0 0 0 4px gold inset;
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(12px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
-            font-size: 4rem;
-            font-weight: 700;
-            color: #fff8e7;
-            text-shadow: 4px 4px 0 #8b4513, 0 0 30px #ffd700;
-            letter-spacing: 2px;
-            margin-bottom: 0.5rem;
+            font-size: 3rem;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
         }
 
-        .subtitle {
-            font-size: 2rem;
-            color: #fff0d0;
-            margin-bottom: 1.5rem;
-            text-shadow: 2px 2px 0 #4b0082;
-            font-weight: 400;
-            border-bottom: 2px dashed gold;
-            display: inline-block;
-            padding-bottom: 0.5rem;
+        .divider {
+            width: 50px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 1.5rem auto;
         }
 
-        .message {
-            font-size: 1.6rem;
-            color: #f5f5f5;
-            background: rgba(75, 0, 130, 0.5);
-            padding: 1.5rem 2.2rem;
-            border-radius: 80px;
-            margin: 2.5rem 0;
-            font-weight: 500;
-            line-height: 1.6;
-            backdrop-filter: blur(5px);
-            border: 2px solid gold;
-            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+        p {
+            font-size: 1.25rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.2rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        .emoji-big {
-            font-size: 3.5rem;
-            display: inline-block;
-            animation: pulse 2s infinite;
-            filter: drop-shadow(0 0 10px gold);
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .button {
-            background: linear-gradient(145deg, #ff8c00, #ff1493);
-            border: none;
-            color: white;
-            font-size: 2rem;
-            font-weight: 700;
-            padding: 1.2rem 3rem;
-            border-radius: 60px;
-            cursor: pointer;
-            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.6), 0 0 0 3px gold inset;
-            transition: all 0.3s ease;
-            margin-top: 2rem;
-            border: 2px solid gold;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-        }
-
-        .button:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 25px 40px rgba(255, 140, 0, 0.8), 0 0 0 4px white inset;
-            background: linear-gradient(145deg, #ffa500, #ff69b4);
-        }
-
-        .button:active {
-            transform: translateY(0);
-        }
-
-        .confetti {
-            position: fixed;
-            width: 14px;
-            height: 14px;
-            background-color: gold;
-            top: -20px;
-            z-index: 9999;
-            animation: confettiFall 3.5s linear forwards;
-            pointer-events: none;
-        }
-
-        @keyframes confettiFall {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-
-        @media (max-width: 600px) {
-            h1 { font-size: 2.8rem; }
-            .subtitle { font-size: 1.6rem; }
-            .message { font-size: 1.3rem; padding: 1rem; }
-            .button { font-size: 1.5rem; padding: 1rem 2rem; }
-            .floating { font-size: 2rem; }
+        /* Адаптация под совсем маленькие экраны */
+        @media (max-width: 400px) {
+            h1 { font-size: 2.4rem; }
+            p { font-size: 1.1rem; }
+            .content { padding: 1.8rem 1rem; }
         }
     </style>
 </head>
 <body>
-
-    <!-- Мерцающие звёзды -->
-    <div class="stars" id="stars"></div>
-
-    <!-- Разноцветные плавающие элементы -->
-    <div class="floating-elements">
-        <div class="floating"><i class="fas fa-heart"></i></div>
-        <div class="floating"><i class="fas fa-flower"></i></div>
-        <div class="floating"><i class="fas fa-star"></i></div>
-        <div class="floating"><i class="fas fa-feather-alt"></i></div>
-        <div class="floating"><i class="fas fa-sun"></i></div>
-        <div class="floating"><i class="fas fa-moon"></i></div>
-        <div class="floating"><i class="fas fa-crown"></i></div>
-        <div class="floating"><i class="fas fa-gem"></i></div>
-        <div class="floating"><i class="fas fa-cloud"></i></div>
-        <div class="floating"><i class="fas fa-infinity"></i></div>
+    <div class="gradient-bg"></div>
+    <div class="moving-shapes">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
     </div>
 
-    <!-- Основная карточка поздравления -->
-    <div class="card">
-        <h1>🌸 С 8 марта! 🌸</h1>
-        <div class="subtitle">самой яркой и вдохновляющей</div>
-        <div class="message">
-            <span class="emoji-big">✨</span> Пусть этот весенний день подарит тебе море улыбок, тепло и свет. Желаю, чтобы всё задуманное сбывалось, а рядом были только любимые люди. Ты чудесная, оставайся такой же солнечной! <span class="emoji-big">💐</span>
-        </div>
-        <div style="font-size: 2.5rem; color: gold; margin: 1rem 0;">🌷🌷🌷</div>
-        <button class="button" id="surpriseBtn">🎉 Сюрприз 🎉</button>
+    <div class="content">
+        <h1>8 марта</h1>
+        <div class="divider"></div>
+        <p>Пусть этот день будет именно таким,<br>каким ты захочешь.</p>
+        <p>Тёплым, светлым, тихим —<br>или полным улыбок.</p>
+        <p>Просто знай: сегодня всё для тебя.</p>
+        <!-- звёздочка удалена по просьбе -->
     </div>
-
-    <script>
-        // Создаём мерцающие звёзды
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 50; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                const size = Math.random() * 6 + 2; // от 2 до 8 пикселей
-                star.style.width = size + 'px';
-                star.style.height = size + 'px';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 5 + 's';
-                star.style.animationDuration = Math.random() * 3 + 2 + 's'; // от 2 до 5 сек
-                starsContainer.appendChild(star);
-            }
-        }
-        createStars();
-
-        // Конфетти по кнопке
-        document.getElementById('surpriseBtn').addEventListener('click', function() {
-            for (let i = 0; i < 200; i++) createConfetti();
-        });
-
-        function createConfetti() {
-            const confetti = document.createElement('div');
-            confetti.classList.add('confetti');
-            const colors = ['#ffd700', '#ff8c00', '#ff1493', '#4b0082', '#7fffd4', '#ff4500', '#da70d6', '#ffb6c1', '#f0e68c', '#dda0dd'];
-            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-            const shape = Math.random();
-            if (shape < 0.33) confetti.style.borderRadius = '50%';
-            else if (shape < 0.66) confetti.style.borderRadius = '0';
-            else { confetti.style.borderRadius = '3px'; confetti.style.width = '8px'; confetti.style.height = '18px'; }
-            confetti.style.left = Math.random() * 100 + '%';
-            confetti.style.animationDelay = Math.random() * 2 + 's';
-            document.body.appendChild(confetti);
-            setTimeout(() => confetti.remove(), 4000);
-        }
-
-        // Небольшой конфетти при загрузке
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                for (let i = 0; i < 40; i++) createConfetti();
-            }, 600);
-        });
-    </script>
-
 </body>
 </html>
